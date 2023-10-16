@@ -19,13 +19,13 @@ public class app {
 
         boolean isUserInputCorrect = false; // setting values to check if user input is input correctly
 
-        while (play == true) {
+        while (play == true) { // == play is there for clarity
 
             isUserInputCorrect = false; // resetting value for subsequent times played
 
-            System.out.println("Guess a number between 1 and 100");
+            System.out.println("Guess a number between 1 and 100" /* + number */);
 
-            try {
+            try { // try catch for incorrect inputs
 
                 int userGuess = scanner.nextInt(); // userGuess is now the variable that stores the guessed number
                 scanner.nextLine(); // fixed scanner bug here instead, now it won't interfere on replays
@@ -39,14 +39,15 @@ public class app {
                     timesPlayed++;
                     continue;
                 } else if (number == userGuess) {
+                    timesPlayed++;
                     System.out.println("Your guess is correct! It took you " + timesPlayed
                             + " tries to figure out the right number.");
 
                     while (isUserInputCorrect == false) {
 
                         System.out.println("Would you like to play again? Yes/No");
-                        // scanner.nextLine(); //encountered scanner bug, 2nd time around it doesn't bug
-                        // however...
+                        // scanner.nextLine(); //encountered scanner bug, 2nd time around it doesn't
+                        // bug, however...
                         String answer = scanner.nextLine();
 
                         if (answer.equalsIgnoreCase("yes")) {
@@ -64,20 +65,19 @@ public class app {
                             System.out.println("Answer input incorrectly, please answer in Yes/No format.");
                             continue;
                         }
-
                     }
                 }
-
             }
 
             catch (InputMismatchException e) {
-                // preventing crashes in case of string input
+                // preventing crashes in case of string input, etc
 
                 System.out.println("Answer input incorrectly, please input your guess in integers");
                 scanner.nextLine(); // consuming this one too, in case of scanner bug
             }
-
         }
+
         scanner.close(); // closing scanner to prevent resource leak
+
     }
 }
