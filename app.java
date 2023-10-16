@@ -1,38 +1,37 @@
 package Gissa;
 
-import java.util.InputMismatchException; //importing tool to prevent crashes in case of string input when an integer is expected
-import java.util.Scanner; //importing scanner for later use
+import java.util.InputMismatchException;
+import java.util.Scanner;
 
 public class app {
 
     public static void main(String[] args) {
 
-        Scanner scanner = new Scanner(System.in); // setting up scanner to take in user input
+        Scanner scanner = new Scanner(System.in);
 
-        double randomNumber = (Math.random() * 100 + 1); // introducing the variable and setting it's value
+        double randomNumber = (Math.random() * 100 + 1);
 
-        int number = (int) (randomNumber); // changing the variable from a double into an int
+        int number = (int) (randomNumber);
 
-        int timesPlayed = 0; // setting up the variable for storing how many times the user has guessed
+        int timesPlayed = 0;
 
         boolean play = true;
 
-        boolean isUserInputCorrect = false; // setting values to check if user input is input correctly
+        boolean isUserInputCorrect = false;
 
-        while (play == true) { // == play is there for clarity
+        while (play == true) { // == play is there for clarity, clean code
 
             isUserInputCorrect = false; // resetting value for subsequent times played
 
             System.out.println("Guess a number between 1 and 100" /* + number */);
 
-            try { // try catch for incorrect inputs
+            try {
 
-                int userGuess = scanner.nextInt(); // userGuess is now the variable that stores the guessed number
-                scanner.nextLine(); // fixed scanner bug here instead, now it won't interfere on replays
-
+                int userGuess = scanner.nextInt();
+                scanner.nextLine(); // fixed scanner bug
                 if (number > userGuess) {
                     System.out.println("Your guess it too low!");
-                    timesPlayed++; // incrementing the variable that will tell the user how many guesses it took
+                    timesPlayed++;
                     continue;
                 } else if (number < userGuess) {
                     System.out.println("Your guess is too high!");
@@ -46,8 +45,6 @@ public class app {
                     while (isUserInputCorrect == false) {
 
                         System.out.println("Would you like to play again? Yes/No");
-                        // scanner.nextLine(); //encountered scanner bug, 2nd time around it doesn't
-                        // bug, however...
                         String answer = scanner.nextLine();
 
                         if (answer.equalsIgnoreCase("yes")) {
@@ -73,11 +70,11 @@ public class app {
                 // preventing crashes in case of string input, etc
 
                 System.out.println("Answer input incorrectly, please input your guess in integers");
-                scanner.nextLine(); // consuming this one too, in case of scanner bug
+                scanner.nextLine();
             }
         }
 
-        scanner.close(); // closing scanner to prevent resource leak
+        scanner.close();
 
     }
 }
